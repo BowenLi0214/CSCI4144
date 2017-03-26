@@ -57,6 +57,12 @@ public class helloword {
 			System.out.println(ytrain.get(i));
 		}
 		
+		
+		
+	}
+	
+	public static void trian(){
+		
 	}
 }
 
