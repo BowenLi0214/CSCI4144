@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.sun.java.swing.plaf.windows.resources.windows_es;
+
 class OpenOB {
 
 	String[][] lines;
@@ -32,14 +34,14 @@ class OpenOB {
 		int string_colomn = 0;
 
 		System.out.println("input the path of file");
-		FileName = scanner.nextLine();
-
+		//FileName = scanner.nextLine();
+		FileName = "wine.data";
 		File file = new File(FileName);
 		Scanner input = new Scanner(file);
 
 		while (input.hasNextLine()) {
 
-			String[] currentLine = input.nextLine().replaceAll("( )+", " ").split(" ");
+			String[] currentLine = input.nextLine().replaceAll("( )+", " ").split(",");
 
 			if (Arrays.toString(currentLine).equals("[]")) {
 				blankLines++;
@@ -56,7 +58,7 @@ class OpenOB {
 		input = new Scanner(file);
 
 		while (input.hasNextLine()) {
-			lines[string_rows] = input.nextLine().replaceAll("( )+", " ").split(" ");
+			lines[string_rows] = input.nextLine().replaceAll("( )+", " ").split(",");
 			string_rows++;
 		}
 	}
@@ -67,7 +69,7 @@ class OpenOB {
 
 		for (int row = 0; row < lines.length - blankLines; row++) {
 			for (int column = 0; column < lines[0].length; column++)
-				System.out.print(lines[row][column] + ",");
+				System.out.print(lines[row][column] + "\t");
 
 			System.out.println("");
 		}
@@ -76,7 +78,7 @@ class OpenOB {
 
 	void showDBRow(int row_number) {
 		for (int column = 0; column < lines[0].length; column++) {
-			System.out.print(lines[row_number][column] + ",");
+			System.out.print(lines[row_number][column] + "\t");
 		}
 
 		System.out.println("");
