@@ -1,5 +1,5 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.*;
 
 public class helloword {
 	public static void main(String [] args) throws FileNotFoundException{
@@ -14,8 +14,9 @@ public class helloword {
 		ArrayList<Double> xtest = new ArrayList<Double>();
 		ArrayList<Double> ytest = new ArrayList<Double>();
 		
-		System.out.println("");
-		trainingData.showDBRow(1);
+		Scanner r=new Scanner(System.in);
+		r.nextInt();
+		
 		
 	}
 }
