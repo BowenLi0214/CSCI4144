@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class helloword {
+public class main {
 	public static void main(String [] args) throws FileNotFoundException{
 
 		OpenOB trainingData = new OpenOB();
