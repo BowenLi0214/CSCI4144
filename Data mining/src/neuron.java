@@ -2,17 +2,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class neuron {
-
+    private universal weight=new universal();
 	private double nValue;
-	private static ArrayList<Double> weights;
-	private static ArrayList<Double> bias;
+	private ArrayList<Double> weights;
+	private ArrayList<Double> bias;
 	private layer currentLayer;
 	private ArrayList<Double> previousXi;
 	
 	public neuron(layer currentLayer, double nvalue){
 		this.nValue = nvalue;
-		this.weights = new ArrayList<Double>();
-		this.bias = new ArrayList<Double>();
+		
+		weights=weight.getweight();
+		bias = weight.getbias();
 		this.currentLayer = currentLayer;
 		previousXi = new ArrayList<Double>();
 		if (currentLayer.getPreviousLayer()!=null){
@@ -63,11 +64,13 @@ public class neuron {
 	}
 	
 	public void initialWeightsAndBias(){
+	
 		if (weights.size() < previousXi.size()) {
 			Random r=new Random();
 			for(int i = 0; i<previousXi.size(); i++){
 				double w=r.nextInt(10)+1;
 				System.out.print(w+" ");
+				
 				weights.add(w);
 			}
 			System.out.println("");

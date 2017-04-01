@@ -71,14 +71,15 @@ public class main {
 			intialarray[i]=0;
 		}
 		for (int i=0;i<xtrain.size();i++){
-			
+			universal uni=new universal();
+			uni.initial();
 			System.out.println("time: "+i);
 			layer layer=new layer(xtrain.get(i),null);	
 			
-
+			printLayer(layer);
 			
 			layer layer2 = new layer(intialarray,layer);
-			layer2.initialAllWeightsAndBias();
+			
 			layer2.calculateAllValues();
 			printLayer(layer2);
 			

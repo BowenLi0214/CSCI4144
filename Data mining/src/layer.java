@@ -10,6 +10,7 @@ public class layer {
 		
 		setPreviousLayer(plLayer);
 		for(int i=0;i<array.length;i++){
+			System.out.println(i);
 			neuron n=new neuron(this,array[i]);
 			Neurons.add(n);
 		}
@@ -45,11 +46,7 @@ public class layer {
 		}
 	}
 	
-	public void initialAllWeightsAndBias(){
-		for(int i=0; i<Neurons.size();i++){
-			Neurons.get(i).initialWeightsAndBias();
-		}
-	}
+	
 	
 
 	
