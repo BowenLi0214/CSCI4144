@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import com.sun.javafx.scene.layout.region.LayeredBackgroundPositionConverter;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class main {
 	public static void main(String [] args) throws FileNotFoundException{
 
@@ -49,20 +52,48 @@ public class main {
 				ytest.add(tempy);
 			}
 		}
-		for (int i=0; i<xtrain.size(); i++){
-			for (int j=0; j<xtrain.get(i).length; j++){
-				System.out.print(xtrain.get(i)[j]+"\t");
-			}
-			
-			System.out.println(ytrain.get(i));
+		
+//		for (int i=0; i<xtrain.size(); i++){
+//			for (int j=0; j<xtrain.get(i).length; j++){
+//				System.out.print(xtrain.get(i)[j]+"\t");
+//			}
+//			
+//			System.out.println(ytrain.get(i));
+//		}
+		
+		train(xtrain,ytrain);
+		
+	}
+	
+	public static void train(ArrayList<double[]> xtrain,ArrayList<Double> ytrain){
+		double[] intialarray=new double[xtrain.get(0).length];
+		for (int i=0; i<xtrain.get(0).length;i++){
+			intialarray[i]=0;
 		}
+		for (int i=0;i<xtrain.size();i++){
+			
+			System.out.println("time: "+i);
+			layer layer=new layer(xtrain.get(i),null);	
+			
+
+			
+			layer layer2 = new layer(intialarray,layer);
+			layer2.initialAllWeightsAndBias();
+			layer2.calculateAllValues();
+			printLayer(layer2);
+			
+		}
+		
 		
 		
 		
 	}
 	
-	public static void trian(){
-		
+	public static void printLayer(layer clayer){
+		for (int j=0;j<clayer.getNeurons().size();j++){
+			System.out.print(clayer.getNeurons().get(j).getnValue()+" ");
+		}
+		System.out.println("");
 	}
 }
 
