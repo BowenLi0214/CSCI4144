@@ -89,6 +89,8 @@ public class main {
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();
 			printLayer(layer3,3);
+			double result=layer3.getNeurons().get(0).getnValue();
+			uni.update(result,ytrain.get(i));
 			System.out.println("");
 			
 		}
