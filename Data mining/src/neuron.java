@@ -5,21 +5,36 @@ public class neuron {
     private universal weight=new universal();
 	private double nValue;
 	private ArrayList<Double> weights;
-	private ArrayList<Double> bias;
+	private double bias;
 	private layer currentLayer;
 	private ArrayList<Double> previousXi;
-	
+	static int count=-1;
+	static int num=0;
+	public void reset(){
+		count=-1;
+		num=0;
+	}
 	public neuron(layer currentLayer, double nvalue){
-		this.nValue = nvalue;
 		
-		weights=weight.getweight();
-		bias = weight.getbias();
-		this.currentLayer = currentLayer;
-		previousXi = new ArrayList<Double>();
-		if (currentLayer.getPreviousLayer()!=null){
-			ArrayList<neuron> Neurons = currentLayer.getPreviousLayer().getNeurons();
-			for(neuron singleNeuron : Neurons){
-				previousXi.add(singleNeuron.getnValue());
+		this.nValue = nvalue;
+		if (num==14){
+			
+			count=-1;
+			num=0;
+		}
+		count++;
+		
+		if (count>12){
+			num++;
+			weights=weight.getweight();
+			bias = weight.getbias();
+			this.currentLayer = currentLayer;
+			previousXi = new ArrayList<Double>();
+			if (currentLayer.getPreviousLayer()!=null){
+				ArrayList<neuron> Neurons = currentLayer.getPreviousLayer().getNeurons();
+				for(neuron singleNeuron : Neurons){
+					previousXi.add(singleNeuron.getnValue());
+				}
 			}
 		}
 	}
@@ -37,10 +52,10 @@ public class neuron {
 	public void setWeights(ArrayList<Double> weights) {
 		this.weights = weights;
 	}
-	public ArrayList<Double> getBias() {
+	public double getBias() {
 		return bias;
 	}
-	public void setBias(ArrayList<Double> bias) {
+	public void setBias(double bias) {
 		this.bias = bias;
 	}
 	
@@ -54,46 +69,14 @@ public class neuron {
 //			System.out.println("");
 			
 			nValue += weights.get(i) * 
-					previousXi.get(i) + 
-					bias.get(i);	
+					previousXi.get(i);
 		}
+		nValue+= bias;	
 	}
 	
 	public void updateWeightsAndBias(){
 		
 	}
 	
-	public void initialWeightsAndBias(){
 	
-		if (weights.size() < previousXi.size()) {
-			Random r=new Random();
-			for(int i = 0; i<previousXi.size(); i++){
-				double w=r.nextInt(10)+1;
-				System.out.print(w+" ");
-				
-				weights.add(w);
-			}
-			System.out.println("");
-			
-			for(int j = 0; j<previousXi.size(); j++){
-				double b=r.nextInt(10)+1;
-				bias.add(b);
-			}
-		}
-		else{
-			Random r=new Random();
-			for(int i = 0; i<previousXi.size(); i++){
-				double w=r.nextInt(10)+1;
-				System.out.print(w+" ");
-				weights.set(i, w);
-			}
-			System.out.println("");
-			
-			for(int j = 0; j<previousXi.size(); j++){
-				double b=r.nextInt(10)+1;
-				bias.set(j, b);
-			}
-		}
-	}
-
 }

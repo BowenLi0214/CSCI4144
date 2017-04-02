@@ -93,6 +93,8 @@ public class main {
 			layer3.makeResultZeroToOne();
 			
 			printLayer(layer3,3);
+			double result=layer3.getNeurons().get(0).getnValue();
+			uni.update(result,ytrain.get(i));
 			System.out.println("");
 			
 		}
