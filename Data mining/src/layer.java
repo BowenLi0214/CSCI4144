@@ -82,4 +82,16 @@ public class layer {
 			Neurons.get(0).setnValue(nValue);
 		}
 	}
+	
+	public double[] makeZeroToOne(){
+		double[] W = new double[Neurons.size()];
+		for(int i=0; i<Neurons.size();i++){
+			double nValue = Neurons.get(i).getnValue();
+			nValue = ((double)nValue /(double)3);
+			W[i] = nValue;
+		}
+		return W;
+	}
+	
+	
 }

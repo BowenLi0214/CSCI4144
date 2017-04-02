@@ -75,17 +75,24 @@ public class main {
 		for (int i=0;i<xtrain.size();i++){
 			universal uni=new universal();
 			uni.initial();
+			
+			System.out.println("");
 			System.out.println("time: "+i);
 			layer layer=new layer(xtrain.get(i),null);	
-			
 			printLayer(layer,1);
+			layer.normalization();
+			double w1[] = layer.makeZeroToOne();
 			System.out.println("");
+			System.out.println("w1: "+Arrays.toString(w1));
 			
 			layer layer2 = new layer(intialarray,layer);
 			layer2.calculateAllValues();
 			layer2.normalization();
+			double w2[] = layer2.makeZeroToOne();
 			printLayer(layer2,2);
+			
 			System.out.println("");
+			System.out.println("w2: "+Arrays.toString(w2));
 			
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();

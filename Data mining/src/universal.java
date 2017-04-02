@@ -54,6 +54,7 @@ public class universal {
 		}
 		bias = layer2;
 	}
+	
 	public void update(double result, double y) {
 		double error=y-result;
 		double minuserror=-error;
