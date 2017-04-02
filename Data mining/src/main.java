@@ -83,11 +83,15 @@ public class main {
 			
 			layer layer2 = new layer(intialarray,layer);
 			layer2.calculateAllValues();
+			layer2.normalization();
 			printLayer(layer2,2);
 			System.out.println("");
 			
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();
+			layer3.normalization();
+			layer3.makeResultZeroToOne();
+			
 			printLayer(layer3,3);
 			System.out.println("");
 			
@@ -97,8 +101,8 @@ public class main {
 	}
 	
 	public static void printLayer(layer clayer,int layerIndex){
+		System.out.print("layer "+layerIndex+"    ");
 		for (int j=0;j<clayer.getNeurons().size();j++){
-			System.out.print("layer "+layerIndex+"    ");
 			System.out.print(clayer.getNeurons().get(j).getnValue()+" ");
 		}
 	}
