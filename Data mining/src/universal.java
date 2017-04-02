@@ -59,6 +59,7 @@ public class universal {
 		double minuserror=-error;
 		double diffactivation=result*(1-result);
 		bias.get(bias.size()-1).set(0,bias.get(bias.size()-1).get(0)-learningrate*(-diffactivation*minuserror));
+		
 	}
 	
 }
