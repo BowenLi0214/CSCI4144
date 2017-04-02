@@ -55,12 +55,31 @@ public class universal {
 		bias = layer2;
 	}
 	
-	public void update(double result, double y) {
+	public void update(double result, double y, double[] w1, double[] w2) {
 		double error=y-result;
 		double minuserror=-error;
 		double diffactivation=result*(1-result);
-		bias.get(bias.size()-1).set(0,bias.get(bias.size()-1).get(0)-learningrate*(-diffactivation*minuserror));
+		//2nd layer bias update
+		double newbias=bias.get(bias.size()-1).get(0)-learningrate*(-diffactivation*minuserror);
+		bias.get(1).set(0,newbias);
+		//1st layer bias update
+		for (int i=0;i<13;i++){
+			newbias=bias.get(0).get(i)-learningrate*(-diffactivation*minuserror*weight.get(1).get(0).get(i)*w2[i]*(1-w2[i]));
+			bias.get(0).set(i,newbias);
+		}
+		//2nd layer weight update
+		for (int i=0;i<13;i++){
+			double newweight=weight.get(1).get(0).get(i)-learningrate*(diffactivation*minuserror*w2[i]);
+			weight.get(1).get(0).set(i, newweight);
+		}
 		
+		//1st layer weight update
+		
+		for (int i=0;i<13;i++){
+			for (int j=0;j<13;j++){
+				double newweight=weight.get(0).get(i).get(j)-learningrate*(diffactivation*minuserror*w2[i]*(1-w2[i])*weight.get(1).get(0).get(i)*w1[j]);
+				weight.get(0).get(i).set(j, newweight);
+			}
+		}
 	}
-	
 }

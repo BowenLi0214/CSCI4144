@@ -101,7 +101,7 @@ public class main {
 			
 			printLayer(layer3,3);
 			double result=layer3.getNeurons().get(0).getnValue();
-			uni.update(result,ytrain.get(i));
+			uni.update(result,ytrain.get(i), w1, w2);
 			System.out.println("");
 			
 		}
