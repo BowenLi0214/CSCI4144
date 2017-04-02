@@ -66,7 +66,9 @@ public class main {
 	}
 	
 	public static void train(ArrayList<double[]> xtrain,ArrayList<Double> ytrain){
-		double[] intialarray=new double[xtrain.get(0).length];
+		double[] intialarray = new double[xtrain.get(0).length];
+		double[] resultArray = new double[1];
+				
 		for (int i=0; i<xtrain.get(0).length;i++){
 			intialarray[i]=0;
 		}
@@ -76,25 +78,29 @@ public class main {
 			System.out.println("time: "+i);
 			layer layer=new layer(xtrain.get(i),null);	
 			
-			printLayer(layer);
+			printLayer(layer,1);
+			System.out.println("");
 			
 			layer layer2 = new layer(intialarray,layer);
-			
 			layer2.calculateAllValues();
-			printLayer(layer2);
+			printLayer(layer2,2);
+			System.out.println("");
+			
+			layer layer3 = new layer(resultArray,layer2);
+			layer3.calculateAllValues();
+			printLayer(layer3,3);
+			System.out.println("");
 			
 		}
-		
-		
 		
 		
 	}
 	
-	public static void printLayer(layer clayer){
+	public static void printLayer(layer clayer,int layerIndex){
 		for (int j=0;j<clayer.getNeurons().size();j++){
+			System.out.print("layer "+layerIndex+"    ");
 			System.out.print(clayer.getNeurons().get(j).getnValue()+" ");
 		}
-		System.out.println("");
 	}
 }
 

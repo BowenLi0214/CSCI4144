@@ -10,7 +10,7 @@ public class universal {
 	
 	public ArrayList<Double> getweight(){
 		i++;
-		System.out.println("layer:"+i/13);
+		//System.out.println("layer:"+i/13);
 		return weight.get(i/13).get(i%13);
 	}
 	public ArrayList<Double> getbias(){
