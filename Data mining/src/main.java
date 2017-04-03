@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Map.Entry;
 
 import com.sun.javafx.scene.layout.region.LayeredBackgroundPositionConverter;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
@@ -120,6 +121,7 @@ public class main {
 		double[] intialarray = new double[xtest.get(0).length];
 		double[] resultArray = new double[1];
 		
+		Map<Double, Double> results = new HashMap<Double,Double>();
 		double fit = 0;
 				
 		for (int i=0; i<xtest.get(0).length;i++){
@@ -162,10 +164,12 @@ public class main {
 			System.out.println("");
 			System.out.println("");
 			
+
+			results.put(result, ytest.get(i));
 			fit += Math.abs(result - ytest.get(i));
+			
 		}
-		
-		System.out.println("fit: "+fit);
+		checkResults(results);
 	}
 	
 	public static void printLayer(layer clayer,int layerIndex){
@@ -173,6 +177,55 @@ public class main {
 		for (int j=0;j<clayer.getNeurons().size();j++){
 			System.out.print(clayer.getNeurons().get(j).getnValue()+" ");
 		}
+	}
+	
+	public static void checkResults(Map<Double, Double> results){
+		int batchSize = results.size() / 3;
+		int i = 0;
+		int fitCorrect = 0;
+		
+		Map<Double, Double> sortedMap = new TreeMap<Double, Double>(results);
+		System.out.println("test size: "+results.size());
+		System.out.println("batch size: "+batchSize);
+		
+		System.out.println(sortedMap);
+		
+		for(Entry<Double, Double> entry : sortedMap.entrySet()){
+			if (i < batchSize) {
+				if (i==0) {
+					System.out.println("3----------------------------------");
+				}
+				System.out.println(entry.getKey()+": class :"+entry.getValue());
+				if (entry.getValue() == 3.0) {
+					fitCorrect++;
+				}
+			}
+			
+			if (i>= batchSize && i < batchSize*2) {
+				if (i==batchSize) {
+					System.out.println("2----------------------------------");
+				}
+				System.out.println(entry.getKey()+": class :"+entry.getValue());
+				if (entry.getValue() == 2.0) {
+					fitCorrect++;
+				}
+			}
+			
+			if (i>= batchSize*2 && i < batchSize*3) {
+				if (i==batchSize*2) {
+					System.out.println("1----------------------------------");
+				}
+				System.out.println(entry.getKey()+": class :"+entry.getValue());
+				if (entry.getValue() == 1.0) {
+					fitCorrect++;	
+				}
+			}
+			i++;
+		}
+		
+		double accuracy = ((double)fitCorrect /(double)results.size());
+		System.out.println("accuracy: "+accuracy);
+		
 	}
 }
 
