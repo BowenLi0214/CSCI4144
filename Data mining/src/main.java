@@ -61,7 +61,7 @@ public class main {
 //			System.out.println(ytrain.get(i));
 //		}
 
-		for(int i=0; i<1000; i++){
+		for(int i=0; i<100; i++){
 			train(xtrain,ytrain);
 		}
 		
@@ -102,6 +102,7 @@ public class main {
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();
 			layer3.normalizationSigmoid();
+			
 			
 			//printLayer(layer3,3);
 			double result=layer3.getNeurons().get(0).getnValue();
@@ -150,6 +151,9 @@ public class main {
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();
 			//layer3.normalization();
+			
+			ArrayList<Double> w = layer3.getNeurons().get(0).getWeights();
+			System.out.println("w: "+w);
 			
 			printLayer(layer3,3);
 			double result=layer3.getNeurons().get(0).getnValue();

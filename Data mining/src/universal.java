@@ -19,7 +19,7 @@ public class universal {
 	}
 
 	private static ArrayList<ArrayList<Double>> bias;
-	private final double learningrate = 0.5;
+	private final double learningrate = 8;
 	//level 1 = layer
 	//level 2 = neuron
 	//level 3 = previos weight
