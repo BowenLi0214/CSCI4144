@@ -9,9 +9,9 @@ public class normalization {
 	    {
 	        return min + input * (max-min);
 	    }
-	    public static double DoNormalize(double input,double MaxIn,double min, double max)
+	    public static double DoNormalize(double input,double MinIn,double MaxIn,double min, double max)
 	    {
-	        double minIn = 0.0;
+	        double minIn = MinIn;
 	        double maxIn = MaxIn;
 	        double minOut = min;
 	        double maxOut = max;
@@ -20,5 +20,11 @@ public class normalization {
             double output = scale(alpha, minOut, maxOut);
             return output;
 	    } 
+	    
+	    public double sigmoid(double x) {
+	        return (1/( 1 + Math.pow(Math.E,(-1*x))));
+	    }
+	    
+	    
 
 }

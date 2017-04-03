@@ -4,8 +4,22 @@ public class universal {
 	private static int i=-1;
 	private static int j=-1;
 	private static ArrayList<ArrayList<ArrayList<Double>>> weight;
+	
+	public static ArrayList<ArrayList<ArrayList<Double>>> getWeight() {
+		return weight;
+	}
+	public static void setWeight(ArrayList<ArrayList<ArrayList<Double>>> weight) {
+		universal.weight = weight;
+	}
+	public static ArrayList<ArrayList<Double>> getBias() {
+		return bias;
+	}
+	public static void setBias(ArrayList<ArrayList<Double>> bias) {
+		universal.bias = bias;
+	}
+
 	private static ArrayList<ArrayList<Double>> bias;
-	private final double learningrate=0.8;
+	private final double learningrate = 0.5;
 	//level 1 = layer
 	//level 2 = neuron
 	//level 3 = previos weight
@@ -22,6 +36,7 @@ public class universal {
 			return bias.get(1).get(0);
 		return bias.get(j/13).get(j%13);
 	}
+	
 	public void initial(){
 		i=0;
 		Random r=new Random();
@@ -34,7 +49,7 @@ public class universal {
 			for (int j=0; j<num; j++){
 				ArrayList<Double> neuronweights=new ArrayList<Double>();
 				for (int k=0;k<13;k++){
-					neuronweights.add(r.nextDouble()*10);
+					neuronweights.add(r.nextDouble()*1);
 				}
 				neurons.add(neuronweights);
 			}
@@ -48,7 +63,7 @@ public class universal {
 			if (i==1)
 				num=1;
 			for (int j=0; j<num; j++){
-				neurons.add(r.nextDouble()*10);
+				neurons.add(r.nextDouble()*1);
 			}
 			layer2.add(neurons);
 		}
@@ -81,5 +96,9 @@ public class universal {
 				weight.get(0).get(i).set(j, newweight);
 			}
 		}
+	}
+	
+	public void SetIndexZero(){
+		i = 0;
 	}
 }

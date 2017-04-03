@@ -20,7 +20,7 @@ public class main {
 		Random r=new Random();
 		for (int i=0; i<trainingData.lines.length; i++){
 			int count=r.nextInt(10)+1;
-			if (count>7){
+			if (count<8){
 				
 				double temparray[]=new double[trainingData.lines[i].length-1];
 				double tempy=-1;
@@ -60,8 +60,13 @@ public class main {
 //			
 //			System.out.println(ytrain.get(i));
 //		}
+
+		for(int i=0; i<1000; i++){
+			train(xtrain,ytrain);
+		}
 		
-		train(xtrain,ytrain);
+		
+		predict(xtest,ytest);
 		
 	}
 	
@@ -76,37 +81,87 @@ public class main {
 			universal uni=new universal();
 			uni.initial();
 			
-			System.out.println("");
-			System.out.println("time: "+i);
+			//System.out.println("");
+			//System.out.println("time: "+i);
 			layer layer=new layer(xtrain.get(i),null);	
-			printLayer(layer,1);
-			layer.normalization();
+			//printLayer(layer,1);
+			layer.normalizationSigmoid();
 			double w1[] = layer.makeZeroToOne();
-			System.out.println("");
-			System.out.println("w1: "+Arrays.toString(w1));
+			//System.out.println("");
+			//System.out.println("w1: "+Arrays.toString(w1));
 			
 			layer layer2 = new layer(intialarray,layer);
 			layer2.calculateAllValues();
-			layer2.normalization();
+			layer2.normalizationSigmoid();
 			double w2[] = layer2.makeZeroToOne();
-			printLayer(layer2,2);
+			//printLayer(layer2,2);
 			
-			System.out.println("");
-			System.out.println("w2: "+Arrays.toString(w2));
+			//System.out.println("");
+			//System.out.println("w2: "+Arrays.toString(w2));
 			
 			layer layer3 = new layer(resultArray,layer2);
 			layer3.calculateAllValues();
-			layer3.normalization();
-			layer3.makeResultZeroToOne();
+			layer3.normalizationSigmoid();
 			
-			printLayer(layer3,3);
+			//printLayer(layer3,3);
 			double result=layer3.getNeurons().get(0).getnValue();
+			
+			normalization nm = new normalization();
 			uni.update(result,ytrain.get(i), w1, w2);
-			System.out.println("");
+			//System.out.println("");
 			
 		}
 		
 		
+	}
+	
+	public static void predict(ArrayList<double[]> xtest,ArrayList<Double> ytest){
+		double[] intialarray = new double[xtest.get(0).length];
+		double[] resultArray = new double[1];
+		
+		double fit = 0;
+				
+		for (int i=0; i<xtest.get(0).length;i++){
+			intialarray[i]=0;
+		}
+		for (int i=0;i<xtest.size();i++){
+			universal uni=new universal();
+			//uni.initial();
+			
+			//System.out.println("");
+			//System.out.println("time: "+i);
+			uni.SetIndexZero();
+			layer layer=new layer(xtest.get(i),null);	
+			layer.normalizationSigmoid();;
+			printLayer(layer,1);
+			
+			System.out.println("");
+			//System.out.println("w1: "+Arrays.toString(w1));
+			
+			layer layer2 = new layer(intialarray,layer);
+			layer2.calculateAllValues();
+			layer2.normalizationSigmoid();;
+			
+			printLayer(layer2,2);
+			
+			System.out.println("");
+			//System.out.println("w2: "+Arrays.toString(w2));
+			
+			layer layer3 = new layer(resultArray,layer2);
+			layer3.calculateAllValues();
+			//layer3.normalization();
+			
+			printLayer(layer3,3);
+			double result=layer3.getNeurons().get(0).getnValue();
+			
+			System.out.println("class: "+ytest.get(i));
+			System.out.println("");
+			System.out.println("");
+			
+			fit += Math.abs(result - ytest.get(i));
+		}
+		
+		System.out.println("fit: "+fit);
 	}
 	
 	public static void printLayer(layer clayer,int layerIndex){
